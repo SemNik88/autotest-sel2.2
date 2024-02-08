@@ -5,6 +5,12 @@ plugins {
 group = 'ru.netology'
 version = '1.0-SNAPSHOT'
 
+sourceCompatibility = 11
+
+// кодировка файлов (если используете русский язык в файлах)
+compileJava.options.encoding = "UTF-8"
+compileTestJava.options.encoding = "UTF-8"
+
 repositories {
     mavenCentral()
 }
@@ -12,8 +18,11 @@ repositories {
 dependencies {
     testImplementation platform('org.junit:junit-bom:5.10.0')
     testImplementation 'org.junit.jupiter:junit-jupiter'
+    testImplementation 'com.codeborne:selenide:5.19.0'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.2'
 }
 
 test {
     useJUnitPlatform()
+    systemProperty 'selenide.headless', System.getProperty('selenide.headless')
 }
